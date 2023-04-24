@@ -1,24 +1,36 @@
 import logo from './logo.svg';
 import './App.css';
-
+import {useState} from 'react';
 function App() {
 
-  const planets = [
-    {name : "Mars" , isGasPlanet: false},
-    {name : "Earth" , isGasPlanet : true},
-    {name : "Jupiter", isGasPlanet : true },
-    {name : "Venus" , isGasPlanet : false}
-  ];
+  const [count,setCount] = useState(0)
 
+  const increase = ()=>{
+    
+    setCount(count+1)
+    
+  }
+
+
+  const decrease = ()=>{
+    console.log(count)
+    setCount(count-1)
+  }
+
+  const setzero = ()=>{
+    console.log(count)
+    setCount(0)
+  }
 
   return (
-    <div className="App">
-      {planets.map((planet,key)=> {
-        return <Planet name={planet.name} isGasPlanet={planet.isGasPlanet}/>
-      }
 
-      )}
-    
+
+    <div className="App">
+      
+      <button onClick={increase}>Increase</button>
+      <button onClick={decrease}>decrease</button>
+      <button onClick={setzero}>Set Zero</button>
+      <h1>{count}</h1>
 
     </div>
   );
