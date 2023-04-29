@@ -1,54 +1,68 @@
-import logo from './logo.svg';
-import './App.css';
-import {useState} from 'react';
-function App() {
+  import logo from './logo.svg';
+  import './App.css';
+  import {useState} from 'react';
+  function App() {
 
-  const [count,setCount] = useState(0)
-
-  const increase = ()=>{
-    
-    setCount(count+1)
-    
-  }
+    const [todoList,setTodoList] = useState([])
+    const [newTask,setNewTask] = useState('')
 
 
-  const decrease = ()=>{
-    console.log(count)
-    setCount(count-1)
-  }
+    const handleChange = (event)=> {
+      setNewTask(event.target.value)
 
-  const setzero = ()=>{
-    console.log(count)
-    setCount(0)
-  }
+    }
 
-  return (
-
-
-    <div className="App">
+    const addTask = () => {
+      const temp = [...todoList,newTask]
+      setTodoList(temp)
       
-      <button onClick={increase}>Increase</button>
-      <button onClick={decrease}>decrease</button>
-      <button onClick={setzero}>Set Zero</button>
-      <h1>{count}</h1>
+    }
 
-    </div>
-  );
-}
+    const deleteTask = (taskName)=>{
+      const newTodoList = todoList.filter((task111)=>{
+          return task111 !== taskName
+
+      })
+      setTodoList(newTodoList)
+    }
+
+    return (
 
 
-const Planet = (props) => {
-  return props.isGasPlanet && <h1>{props.name}</h1>
+      <div className="App">
+          <div>
+            <input onChange={handleChange}/>
+            <button onClick={addTask}>Add Task</button>
+          </div>
+          <div className='list'>
+            {todoList.map((task)=>{
+                return <div>
+                    <h1>{task}</h1>
+                    <button onClick = {()=>deleteTask(task)}>X</button>
+
+                </div>
+                
+            })}
+          </div>
 
 
-}
-  
+      </div>
+    );
+  }
+
+
+  const Planet = (props) => {
+    return props.isGasPlanet && <h1>{props.name}</h1>
+
+
+  }
+    
+      
+
     
 
-  
 
 
 
 
-
-export default App;
+  export default App;
